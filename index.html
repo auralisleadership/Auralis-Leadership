@@ -354,13 +354,16 @@
     /* LANG */
     [data-lang="fr"] { display: none !important; }
     body.fr [data-lang="en"] { display: none !important; }
-    body.fr [data-lang="fr"] { display: block !important; }
+    body.fr [data-lang="fr"] { display: revert !important; }
     body.fr a[data-lang="fr"] { display: inline-flex !important; }
+    body.fr button[data-lang="fr"] { display: inline-flex !important; }
+    body.fr p[data-lang="fr"] { display: block !important; }
+    body.fr h1[data-lang="fr"] { display: block !important; }
+    body.fr h2[data-lang="fr"] { display: block !important; }
+    body.fr h3[data-lang="fr"] { display: block !important; }
+    body.fr div[data-lang="fr"] { display: block !important; }
     body.fr span[data-lang="fr"] { display: inline !important; }
-    body.fr span[data-lang="en"] { display: none !important; }
-    span[data-lang="fr"] { display: none !important; }
-    a[data-lang="fr"] { display: none !important; }
-    body.fr a[data-lang="en"] { display: none !important; }
+    body.fr li[data-lang="fr"] { display: list-item !important; }
 
     /* RESPONSIVE */
     @media (max-width: 960px) {
