@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Auralis Leadership — Cassandra Poulin</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --cream: #F5F0E8;
+      --green: #1C3028;
+      --gold: #B8965A;
+      --gold-light: #D4AA6E;
+      --dark: #1A1A18;
+      --text: #2C2C2A;
+      --text-light: #6B6B68;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--text); font-weight: 300; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 60px;
+      background: rgba(245,240,232,0.96); backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(184,150,90,0.15);
+    }
+    .nav-logo img { height: 48px; width: auto; }
+    .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
+    .nav-links a {
+      font-family: 'Jost', sans-serif; font-weight: 400; font-size: 11px;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--text); text-decoration: none; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-right { display: flex; align-items: center; gap: 20px; }
+    .lang-toggle {
+      font-family: 'Jost', sans-serif; font-size: 11px; letter-spacing: 0.15em;
+      color: var(--gold); cursor: pointer; background: none; border: none; font-weight: 500;
+    }
+    .btn-talk {
+      font-family: 'Jost', sans-serif; font-size: 11px; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--cream); background: var(--green);
+      padding: 13px 26px; text-decoration: none; transition: background 0.2s;
+    }
+    .btn-talk:hover { background: var(--gold); }
+
+    /* HERO */
+    .hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; padding-top: 84px; }
+    .hero-left {
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 80px 64px; background: var(--cream);
+    }
+    .hero-eyebrow {
+      font-family: 'Jost', sans-serif; font-size: 10px; letter-spacing: 0.25em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 28px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .hero-eyebrow::before { content: ''; display: block; width: 32px; height: 1px; background: var(--gold); }
+    .hero-headline {
+      font-family: 'Cormorant Garamond', serif; font-size: clamp(40px, 4.2vw, 62px);
+      font-weight: 300; line-height: 1.12; color: var(--dark); margin-bottom: 24px;
+    }
+    .hero-headline em { font-style: italic; color: var(--gold); }
+    .hero-sub { font-size: 15px; line-height: 1.75; color: var(--text-light); max-width: 400px; margin-bottom: 12px; }
+    .hero-sub-bold { font-size: 15px; line-height: 1.75; color: var(--text); font-weight: 400; max-width: 400px; margin-bottom: 44px; }
+    .hero-actions { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; }
+    .btn-primary {
+      font-family: 'Jost', sans-serif; font-size: 11px; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--cream); background: var(--green);
+      padding: 16px 30px; text-decoration: none; display: inline-flex;
+      align-items: center; gap: 10px; transition: background 0.2s;
+    }
+    .btn-primary:hover { background: var(--gold); }
+    .btn-secondary {
+      font-family: 'Jost', sans-serif; font-size: 11px; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--text); text-decoration: none;
+      border-bottom: 1px solid var(--gold); padding-bottom: 2px; transition: color 0.2s;
+    }
+    .btn-secondary:hover { color: var(--gold); }
+    .hero-right { position: relative; overflow: hidden; }
+    .hero-right img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+
+    /* DIFFERENTIATOR BAND */
+    .diff-band {
+      background: var(--dark); padding: 64px 60px;
+      display: flex; flex-direction: column; align-items: center; text-align: center;
+    }
+    .diff-band .eyebrow {
+      font-family: 'Jost', sans-serif; font-size: 10px; letter-spacing: 0.25em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 28px;
+    }
+    .diff-band h2 {
+      font-family: 'Cormorant Garamond', serif; font-size: clamp(28px, 3.5vw, 48px);
+      font-weight: 300; color: var(--cream); line-height: 1.3; max-width: 760px;
+    }
+    .diff-band h2 em { font-style: italic; color: var(--gold-light); }
+    .diff-band p {
+      font-size: 15px; color: rgba(245,240,232,0.6); line-height: 1.8;
+      max-width: 600px; margin-top: 24px;
+    }
+    .diff-divider {
+      width: 60px; height: 1px; background: var(--gold); opacity: 0.4; margin: 32px auto;
+    }
+    .diff-quote {
+      font-family: 'Cormorant Garamond', serif; font-size: clamp(18px, 2vw, 26px);
+      font-style: italic; color: var(--cream); max-width: 680px; line-height: 1.5;
+    }
+
+    /* DIAGNOSTIC SECTION */
+    .diagnostic { background: var(--cream); padding: 100px 60px; }
+    .diagnostic-top {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+      align-items: start; margin-bottom: 80px;
+    }
+    .section-eyebrow {
+      font-family: 'Jost', sans-serif; font-size: 10px; letter-spacing: 0.25em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 20px;
+    }
+    .diagnostic-top h2 {
+      font-family: 'Cormorant Garamond', serif; font-size: clamp(32px, 3vw, 46px);
+      font-weight: 300; color: var(--dark); line-height: 1.2; margin-bottom: 20px;
+    }
+    .diagnostic-top h2 em { font-style: italic; color: var(--gold); }
+    .diagnostic-top p { font-size: 15px; line-height: 1.8; color: var(--text-light); margin-bottom: 14px; }
+    .diagnostic-top p strong { color: var(--text); font-weight: 400; }
+
+    /* NOTEBOOK IMAGE */
+    .notebook-banner { width: 100%; height: 420px; overflow: hidden; position: relative; }
+    .notebook-banner img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
+    .notebook-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(90deg, rgba(28,48,40,0.7) 0%, rgba(28,48,40,0.1) 60%);
+      display: flex; align-items: center; padding: 60px;
+    }
+    .notebook-overlay-text h3 {
+      font-family: 'Cormorant Garamond', serif; font-size: clamp(28px, 3vw, 44px);
+      font-weight: 300; color: var(--cream); line-height: 1.3; margin-bottom: 12px;
+    }
+    .notebook-overlay-text h3 em { font-style: italic; color: var(--gold-light); }
+    .notebook-overlay-text p { font-size: 14px; color: rgba(245,240,232,0.7); max-width: 360px; line-height: 1.7; }
+
+    /* 6 DIMENSIONS */
+    .dimensions { background: var(--green); padding: 80px 60px; }
+    .dimensions-header { text-align: center; margin-bottom: 60px; }
+    .dimensions-header h2 {
+      font-family: 'Cormorant Garamond', serif; font-size: clamp(28px, 3vw, 42px);
+      font-weight: 300; color: var(--cream); line-height: 1.3;
+    }
+    .dimensions-header h2 em { font-style: italic; color: var(--gold-light); }
+    .dimensions-header p { font-size: 14px; color: rgba(245,240,232,0.6); margin-top: 16px; }
+    .dimensions-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
+    }
+    .dimension-card {
+      padding: 40px 36px;
+      border: 1px solid rgba(184,150,90,0.15);
+      background: rgba(255,255,255,0.03);
+      transition: background 0.2s;
+    }
+    .dimension-card:hover { background: rgba(184,150,90,0.06); }
+    .dim-number {
+      font-family: 'Cormorant Garamond', serif; font-size: 11px;
+      color: var(--gold); letter-spacing: 0.15em; margin-bottom: 12px;
+    }
+    .dim-name {
+      font-family: 'Cormorant Garamond', serif; font-size: 24px;
+      font-weight: 400; color: var(--cream); margin-bottom: 12px;
+    }
+    .dim-desc { font-size: 13px; color: rgba(245,240,232,0.55); line-height: 1.7; }
+
+    /* MATURITY BAND */
+    .maturity { background: var(--cream); padding: 100px 60px; }
+    .maturity h2 {
+      font-family: 'Cormorant Garamond', serif; font-size: clamp(28px, 3vw, 42px);
+      font-weight: 300; color: var(--dark); line-height: 1.3; margin-bottom: 12px;
+      text-align: center;
+    }
+    .maturity h2 em { font-style: italic; color: var(--gold); }
+    .maturity-sub { text-align: center; font-size: 14px; color: var(--text-light); margin-bottom: 60px; }
+    .maturity-levels { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; }
+    .maturity-level {
+      padding: 36px 24px; border-left: 1px solid rgba(184,150,90,0.2);
+      position: relative;
+    }
+    .maturity-level:first-child { border-left: none; }
+    .maturity-num {
+      font-family: 'Cormorant Garamond', serif; font-size: 48px;
+      font-weight: 300; color: rgba(184,150,90,0.2); line-height: 1;
+      margin-bottom: 8px;
+    }
+    .maturity-label {
+      font-family: 'Jost', sans-serif; font-size: 10px; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 8px;
+    }
+    .maturity-name {
+      font-family: 'Cormorant Garamond', serif; font-size: 20px;
+      color: var(--dark); margin-bottom: 10px; font-weight: 400;
+    }
+    .maturity-desc { font-size: 12px; color: var(--text-light); line-height: 1.6; }
+
+    /* APPROACH */
+    .approach { background: var(--cream); padding: 100px 60px; border-top: 1px solid rgba(184,150,90,0.15); }
+    .approach-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: start; }
+    .approach h2 {
+      font-family: 'Cormorant Garamond', serif; font-size: clamp(32px, 3vw, 46px);
+      font-weight: 300; color: var(--dark); line-height: 1.2; margin-bottom: 24px;
+    }
+    .approach h2 em { font-style: italic; color: var(--gold); }
+    .approach p { font-size: 15px; line-height: 1.8; color: var(--text-light); margin-bottom: 16px; }
+    .approach p strong { color: var(--text); font-weight: 400; }
+    .divider-gold { display: flex; align-items: center; gap: 12px; margin: 28px 0; }
+    .divider-gold::before, .divider-gold::after { content: ''; height: 1px; background: var(--gold); opacity: 0.4; width: 40px; }
+    .pull-quote {
+      font-family: 'Cormorant Garamond', serif; font-size: 20px; font-style: italic;
+      color: var(--text); font-weight: 400; line-height: 1.5;
+    }
+    .pull-attr { margin-top: 8px; font-size: 11px; letter-spacing: 0.1em; color: var(--gold); }
+
+    /* CTA */
+    .cta-section { background: var(--green); padding: 120px 60px; text-align: center; }
+    .cta-eyebrow {
+      font-family: 'Jost', sans-serif; font-size: 10px; letter-spacing: 0.25em;
+      text-transform: uppercase; color: var(--gold-light); margin-bottom: 28px;
+    }
+    .cta-section h2 {
+      font-family: 'Cormorant Garamond', serif; font-size: clamp(36px, 4vw, 56px);
+      font-weight: 300; color: var(--cream); line-height: 1.2;
+      max-width: 680px; margin: 0 auto 16px;
+    }
+    .cta-section h2 em { font-style: italic; color: var(--gold-light); }
+    .cta-section p { font-size: 15px; color: rgba(245,240,232,0.6); margin-bottom: 44px; }
+    .btn-cta {
+      font-family: 'Jost', sans-serif; font-size: 11px; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--cream); border: 1px solid rgba(184,150,90,0.5);
+      padding: 18px 48px; text-decoration: none; display: inline-flex;
+      align-items: center; gap: 10px; transition: all 0.2s;
+    }
+    .btn-cta:hover { border-color: var(--gold-light); color: var(--gold-light); }
+
+    /* FOOTER */
+    footer { background: var(--dark); padding: 60px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 40px; }
+    .footer-name { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 400; color: var(--cream); letter-spacing: 0.08em; margin-top: 16px; }
+    .footer-title { font-family: 'Jost', sans-serif; font-size: 11px; letter-spacing: 0.15em; color: var(--gold); margin-top: 4px; }
+    .footer-desc { font-size: 13px; color: rgba(245,240,232,0.45); line-height: 1.7; margin-top: 16px; max-width: 240px; }
+    .footer-nav h4, .footer-contact h4 { font-family: 'Jost', sans-serif; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+    .footer-nav ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-nav a, .footer-contact a { font-size: 13px; color: rgba(245,240,232,0.55); text-decoration: none; letter-spacing: 0.05em; transition: color 0.2s; display: block; margin-bottom: 8px; }
+    .footer-nav a:hover, .footer-contact a:hover { color: var(--gold); }
+    .footer-bottom { background: var(--dark); padding: 20px 60px; border-top: 1px solid rgba(184,150,90,0.1); display: flex; justify-content: space-between; }
+    .footer-bottom p { font-size: 11px; color: rgba(245,240,232,0.25); letter-spacing: 0.05em; }
+
+
+    /* FIELD NOTES */
+    .field-notes { background: var(--cream); padding: 100px 60px; border-top: 1px solid rgba(184,150,90,0.15); }
+    .field-notes-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 56px; }
+    .field-notes-header h2 {
+      font-family: 'Cormorant Garamond', serif; font-size: clamp(32px, 3vw, 46px);
+      font-weight: 300; color: var(--dark); line-height: 1.2;
+    }
+    .field-notes-header h2 em { font-style: italic; color: var(--gold); }
+    .field-notes-header a {
+      font-family: 'Jost', sans-serif; font-size: 11px; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--gold); text-decoration: none;
+      border-bottom: 1px solid rgba(184,150,90,0.4); padding-bottom: 2px;
+      white-space: nowrap; transition: color 0.2s;
+    }
+    .field-notes-header a:hover { color: var(--dark); }
+    .field-notes-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+    .field-card { display: block; text-decoration: none; group: true; }
+    .field-card-image {
+      width: 100%; aspect-ratio: 1/1; overflow: hidden;
+      margin-bottom: 20px; position: relative;
+    }
+    .field-card-image img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+    .field-card:hover .field-card-image img { transform: scale(1.03); }
+    .field-card-type {
+      font-family: 'Jost', sans-serif; font-size: 10px; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 10px;
+    }
+    .field-card-title {
+      font-family: 'Cormorant Garamond', serif; font-size: 22px;
+      font-weight: 400; color: var(--dark); line-height: 1.3;
+      margin-bottom: 10px; transition: color 0.2s;
+    }
+    .field-card:hover .field-card-title { color: var(--gold); }
+    .field-card-desc { font-size: 13px; color: var(--text-light); line-height: 1.7; margin-bottom: 14px; }
+    .field-card-link {
+      font-family: 'Jost', sans-serif; font-size: 11px; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--gold);
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+    @media (max-width: 960px) {
+      .field-notes { padding: 60px 24px; }
+      .field-notes-header { flex-direction: column; align-items: flex-start; gap: 16px; }
+      .field-notes-grid { grid-template-columns: 1fr; }
+    }
+
+    /* LANG */
+    [data-lang="fr"] { display: none; }
+    body.fr [data-lang="en"] { display: none; }
+    body.fr [data-lang="fr"] { display: block; }
+    body.fr span[data-lang="fr"] { display: inline; }
+    body.fr span[data-lang="en"] { display: none; }
+    span[data-lang="fr"] { display: none; }
+
+    /* RESPONSIVE */
+    @media (max-width: 960px) {
+      nav { padding: 16px 24px; }
+      .nav-links { display: none; }
+      .hero { grid-template-columns: 1fr; }
+      .hero-right { height: 55vh; }
+      .hero-left { padding: 60px 24px; }
+      .diff-band { padding: 48px 24px; }
+      .diagnostic { padding: 60px 24px; }
+      .diagnostic-top { grid-template-columns: 1fr; gap: 40px; }
+      .notebook-banner { height: 280px; }
+      .notebook-overlay { padding: 32px 24px; }
+      .dimensions { padding: 60px 24px; }
+      .dimensions-grid { grid-template-columns: 1fr; }
+      .maturity { padding: 60px 24px; }
+      .maturity-levels { grid-template-columns: 1fr 1fr; gap: 20px; }
+      .maturity-level { border-left: none; border-top: 1px solid rgba(184,150,90,0.2); }
+      .approach { padding: 60px 24px; }
+      .approach-inner { grid-template-columns: 1fr; gap: 48px; }
+      .cta-section { padding: 80px 24px; }
+      footer { grid-template-columns: 1fr; padding: 48px 24px; }
+      .footer-bottom { padding: 16px 24px; flex-direction: column; gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#"><img src="banner.png" alt="Auralis Leadership" /></a>
+  <ul class="nav-links">
+    <li><a href="#about" data-lang="en">About</a><a href="#about" data-lang="fr">À propos</a></li>
+    <li><a href="#diagnostic" data-lang="en">Diagnostic</a><a href="#diagnostic" data-lang="fr">Diagnostic</a></li>
+    <li><a href="#approach" data-lang="en">Approach</a><a href="#approach" data-lang="fr">Approche</a></li>
+    <li><a href="#insights" data-lang="en">Field Notes</a><a href="#insights" data-lang="fr">Notes de terrain</a></li>
+    <li><a href="#contact" data-lang="en">Contact</a><a href="#contact" data-lang="fr">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="lang-toggle" onclick="toggleLang()">FR | EN</button>
+    <a href="#contact" class="btn-talk" data-lang="en">Let's Talk →</a>
+    <a href="#contact" class="btn-talk" data-lang="fr">Parlons →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow" data-lang="en">A Different Question</p>
+    <p class="hero-eyebrow" data-lang="fr">Une question différente</p>
+    <h1 class="hero-headline" data-lang="en">Something feels off<br>in your organization.<br>You just can't<br><em>narrow it down.</em></h1>
+    <h1 class="hero-headline" data-lang="fr">Quelque chose ne tourne<br>pas rond.<br>Vous n'arrivez pas à<br><em>mettre le doigt dessus.</em></h1>
+    <p class="hero-sub" data-lang="en">You've tried the meetings, the restructuring, the new processes. It still isn't working.</p>
+    <p class="hero-sub" data-lang="fr">Vous avez essayé les réunions, la restructuration, les nouveaux processus. Ça ne fonctionne toujours pas.</p>
+    <p class="hero-sub-bold" data-lang="en">That's not a leadership problem. That's a pattern problem.</p>
+    <p class="hero-sub-bold" data-lang="fr">Ce n'est pas un problème de leadership. C'est un problème de patterns.</p>
+    <div class="hero-actions">
+      <a href="#diagnostic" class="btn-primary" data-lang="en">Explore the Diagnostic →</a>
+      <a href="#diagnostic" class="btn-primary" data-lang="fr">Explorer le diagnostic →</a>
+      <a href="#contact" class="btn-secondary" data-lang="en">Let's Talk</a>
+      <a href="#contact" class="btn-secondary" data-lang="fr">Parlons</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <img src="hero.png" alt="Cassandra Poulin" />
+  </div>
+</section>
+
+<!-- DIFFERENTIATOR BAND -->
+<section class="diff-band">
+  <p class="eyebrow" data-lang="en">What makes this different</p>
+  <p class="eyebrow" data-lang="fr">Ce qui rend cela différent</p>
+  <h2 data-lang="en">Most assessments evaluate <em>people.</em><br>This one evaluates the <em>environment</em> that surrounds them.</h2>
+  <h2 data-lang="fr">La plupart des évaluations mesurent <em>les personnes.</em><br>Celle-ci évalue <em>l'environnement</em> qui les entoure.</h2>
+  <p data-lang="en">Performance is not solely a reflection of individuals. It emerges from the interaction between people and the conditions in which they operate — the clarity, authority, information, alignment, systems, and feedback that either enable performance or quietly undermine it.</p>
+  <p data-lang="fr">La performance n'est pas uniquement le reflet des individus. Elle émerge de l'interaction entre les personnes et les conditions dans lesquelles elles évoluent — la clarté, l'autorité, l'information, l'alignement, les systèmes et la rétroaction.</p>
+  <div class="diff-divider"></div>
+  <p class="diff-quote" data-lang="en">"When performance issues appear, most people look at the people. I look at the environment. That's where the real answer lives."</p>
+  <p class="diff-quote" data-lang="fr">« Quand des problèmes de performance apparaissent, la plupart regardent les personnes. Moi, je regarde l'environnement. C'est là que se trouve la vraie réponse. »</p>
+  <p style="margin-top:16px; font-size:12px; letter-spacing:0.1em; color:var(--gold);">— Cassandra Poulin, Organizational Diagnostician</p>
+</section>
+
+<!-- DIAGNOSTIC -->
+<section class="diagnostic" id="diagnostic">
+  <div class="diagnostic-top">
+    <div>
+      <p class="section-eyebrow" data-lang="en">The Auralis Performance Environment Diagnostic™</p>
+      <p class="section-eyebrow" data-lang="fr">Le Diagnostic Auralis Performance Environment™</p>
+      <h2 data-lang="en">Uncover what's <em>really</em><br>shaping your results.</h2>
+      <h2 data-lang="fr">Découvrez ce qui <em>façonne vraiment</em><br>vos résultats.</h2>
+      <p data-lang="en">I start by asking four questions: What's working? What do you think isn't? What are your blind spots? And — if you had a magic wand, what would you change instantly?</p>
+      <p data-lang="fr">Je commence par quatre questions : Qu'est-ce qui fonctionne? Qu'est-ce qui ne fonctionne pas? Quels sont vos angles morts? Et — si vous aviez une baguette magique, que changeriez-vous instantanément?</p>
+      <p data-lang="en"><strong>Then we go deeper.</strong> Because what you think you want to fix — is that really it? Or is there something else behind it?</p>
+      <p data-lang="fr"><strong>Ensuite, on creuse.</strong> Parce que ce que vous pensez vouloir régler — est-ce vraiment ça? Ou y a-t-il autre chose derrière?</p>
+      <a href="#contact" class="btn-primary" style="margin-top:32px; display:inline-flex;" data-lang="en">Book the Diagnostic →</a>
+      <a href="#contact" class="btn-primary" style="margin-top:32px; display:inline-flex;" data-lang="fr">Réserver le diagnostic →</a>
+    </div>
+    <div>
+      <p class="section-eyebrow" data-lang="en">What the diagnostic measures</p>
+      <p class="section-eyebrow" data-lang="fr">Ce que le diagnostic mesure</p>
+      <p data-lang="en">36 questions across 6 dimensions. Administered across all levels of your organization — because <strong>if someone can't answer a question, that itself is diagnostic data.</strong></p>
+      <p data-lang="fr">36 questions réparties en 6 dimensions. Administré à tous les niveaux de votre organisation — car <strong>si quelqu'un ne peut pas répondre à une question, c'est déjà une donnée diagnostique.</strong></p>
+      <p style="margin-top:16px;" data-lang="en">Results produce an overall Performance Environment Score (0–100), a dimension breakdown, a gap analysis across role tiers, and a plain-language interpretation of what the pattern means — and what to do about it.</p>
+      <p style="margin-top:16px;" data-lang="fr">Les résultats produisent un score global (0–100), une analyse par dimension, une analyse des écarts entre niveaux hiérarchiques, et une interprétation claire de ce que le pattern signifie — et quoi en faire.</p>
+    </div>
+  </div>
+</section>
+
+<!-- NOTEBOOK IMAGE -->
+<div class="notebook-banner">
+  <img src="notebook.png" alt="Auralis Performance Environment Diagnostic" />
+  <div class="notebook-overlay">
+    <div class="notebook-overlay-text">
+      <h3 data-lang="en">The Auralis<br><em>Performance Environment</em><br>Diagnostic™</h3>
+      <h3 data-lang="fr">Le Diagnostic<br><em>Performance Environment</em><br>d'Auralis™</h3>
+      <p data-lang="en">A proprietary framework for assessing the conditions that shape performance.</p>
+      <p data-lang="fr">Un cadre propriétaire pour évaluer les conditions qui façonnent la performance.</p>
+    </div>
+  </div>
+</div>
+
+<!-- 6 DIMENSIONS -->
+<section class="dimensions">
+  <div class="dimensions-header">
+    <p class="section-eyebrow" style="color:var(--gold-light);" data-lang="en">Six Dimensions of the Performance Environment</p>
+    <p class="section-eyebrow" style="color:var(--gold-light);" data-lang="fr">Six dimensions de l'environnement de performance</p>
+    <h2 data-lang="en">The diagnostic examines the <em>conditions</em><br>surrounding your people — not the people themselves.</h2>
+    <h2 data-lang="fr">Le diagnostic examine les <em>conditions</em><br>entourant vos personnes — pas les personnes elles-mêmes.</h2>
+    <p data-lang="en">Each dimension reveals a different layer of what's enabling — or silently blocking — performance in your organization.</p>
+    <p data-lang="fr">Chaque dimension révèle une couche différente de ce qui permet — ou bloque silencieusement — la performance dans votre organisation.</p>
+  </div>
+  <div class="dimensions-grid">
+    <div class="dimension-card">
+      <div class="dim-number" data-lang="en">Dimension 1</div>
+      <div class="dim-number" data-lang="fr">Dimension 1</div>
+      <div class="dim-name" data-lang="en">Clarity</div>
+      <div class="dim-name" data-lang="fr">Clarté</div>
+      <div class="dim-desc" data-lang="en">Are expectations, priorities, and success measures clearly defined — and consistently understood across all levels?</div>
+      <div class="dim-desc" data-lang="fr">Les attentes, priorités et mesures de succès sont-elles clairement définies et comprises à tous les niveaux?</div>
+    </div>
+    <div class="dimension-card">
+      <div class="dim-number">Dimension 2</div>
+      <div class="dim-name" data-lang="en">Authority</div>
+      <div class="dim-name" data-lang="fr">Autorité</div>
+      <div class="dim-desc" data-lang="en">Do people have the decision-making authority they need — and are those rights clear, respected, and proportionate?</div>
+      <div class="dim-desc" data-lang="fr">Les gens ont-ils le pouvoir décisionnel nécessaire — et ces droits sont-ils clairs, respectés et proportionnés?</div>
+    </div>
+    <div class="dimension-card">
+      <div class="dim-number">Dimension 3</div>
+      <div class="dim-name" data-lang="en">Information</div>
+      <div class="dim-name" data-lang="fr">Information</div>
+      <div class="dim-desc" data-lang="en">Does the right information reach the right people at the right time — or does it get stuck, filtered, or lost?</div>
+      <div class="dim-desc" data-lang="fr">La bonne information atteint-elle les bonnes personnes au bon moment — ou se perd-elle en chemin?</div>
+    </div>
+    <div class="dimension-card">
+      <div class="dim-number">Dimension 4</div>
+      <div class="dim-name" data-lang="en">Alignment</div>
+      <div class="dim-name" data-lang="fr">Alignement</div>
+      <div class="dim-desc" data-lang="en">Are teams working toward the same priorities — or are competing agendas quietly pulling the organization apart?</div>
+      <div class="dim-desc" data-lang="fr">Les équipes travaillent-elles vers les mêmes priorités — ou des agendas concurrents tirent-ils l'organisation dans des directions opposées?</div>
+    </div>
+    <div class="dimension-card">
+      <div class="dim-number">Dimension 5</div>
+      <div class="dim-name" data-lang="en">Systems</div>
+      <div class="dim-name" data-lang="fr">Systèmes</div>
+      <div class="dim-desc" data-lang="en">Do the tools, processes, and structures support the work — or do people work around them just to get things done?</div>
+      <div class="dim-desc" data-lang="fr">Les outils, processus et structures soutiennent-ils le travail — ou les gens doivent-ils les contourner pour avancer?</div>
+    </div>
+    <div class="dimension-card">
+      <div class="dim-number">Dimension 6</div>
+      <div class="dim-name" data-lang="en">Feedback</div>
+      <div class="dim-name" data-lang="fr">Rétroaction</div>
+      <div class="dim-desc" data-lang="en">Does the organization learn from what's working and what isn't — or do the same problems keep resurfacing?</div>
+      <div class="dim-desc" data-lang="fr">L'organisation apprend-elle de ce qui fonctionne et de ce qui ne fonctionne pas — ou les mêmes problèmes réapparaissent-ils?</div>
+    </div>
+  </div>
+</section>
+
+<!-- MATURITY MODEL -->
+<section class="maturity">
+  <p class="section-eyebrow" style="text-align:center; margin-bottom:16px;">Performance Environment Maturity Model</p>
+  <h2 data-lang="en">Where does your organization <em>actually</em> stand?</h2>
+  <h2 data-lang="fr">Où se situe <em>réellement</em> votre organisation?</h2>
+  <p class="maturity-sub" data-lang="en">The diagnostic places your organization within one of five levels — describing the system, not the people.</p>
+  <p class="maturity-sub" data-lang="fr">Le diagnostic situe votre organisation dans l'un des cinq niveaux — décrivant le système, pas les personnes.</p>
+  <div class="maturity-levels">
+    <div class="maturity-level">
+      <div class="maturity-num">1</div>
+      <div class="maturity-label" data-lang="en">Score 0–39</div>
+      <div class="maturity-label" data-lang="fr">Score 0–39</div>
+      <div class="maturity-name" data-lang="en">Reactive</div>
+      <div class="maturity-name" data-lang="fr">Réactif</div>
+      <div class="maturity-desc" data-lang="en">The environment works against performance. People perform despite the system — not because of it.</div>
+      <div class="maturity-desc" data-lang="fr">L'environnement nuit à la performance. Les gens performent malgré le système — pas grâce à lui.</div>
+    </div>
+    <div class="maturity-level">
+      <div class="maturity-num">2</div>
+      <div class="maturity-label">Score 40–59</div>
+      <div class="maturity-name" data-lang="en">Fragmented</div>
+      <div class="maturity-name" data-lang="fr">Fragmenté</div>
+      <div class="maturity-desc" data-lang="en">Pockets of effectiveness exist, but there is no consistent system. Outcomes depend on which team you're on.</div>
+      <div class="maturity-desc" data-lang="fr">Des îlots d'efficacité existent, mais sans système cohérent. Les résultats dépendent de l'équipe où l'on se trouve.</div>
+    </div>
+    <div class="maturity-level">
+      <div class="maturity-num">3</div>
+      <div class="maturity-label">Score 60–74</div>
+      <div class="maturity-name" data-lang="en">Stabilized</div>
+      <div class="maturity-name" data-lang="fr">Stabilisé</div>
+      <div class="maturity-desc" data-lang="en">A functioning baseline is in place. The system holds steady — but doesn't flex well under pressure or change.</div>
+      <div class="maturity-desc" data-lang="fr">Une base fonctionnelle est en place. Le système tient — mais ne s'adapte pas bien sous pression.</div>
+    </div>
+    <div class="maturity-level">
+      <div class="maturity-num">4</div>
+      <div class="maturity-label">Score 75–89</div>
+      <div class="maturity-name" data-lang="en">Enabling</div>
+      <div class="maturity-name" data-lang="fr">Habilitant</div>
+      <div class="maturity-desc" data-lang="en">The environment actively supports performance. People can do their best work without persistent friction.</div>
+      <div class="maturity-desc" data-lang="fr">L'environnement soutient activement la performance. Les gens peuvent donner leur meilleur sans friction persistante.</div>
+    </div>
+    <div class="maturity-level">
+      <div class="maturity-num">5</div>
+      <div class="maturity-label">Score 90–100</div>
+      <div class="maturity-name" data-lang="en">Generative</div>
+      <div class="maturity-name" data-lang="fr">Génératif</div>
+      <div class="maturity-desc" data-lang="en">The environment amplifies performance and adaptation. The system improves itself in motion. Performance compounds.</div>
+      <div class="maturity-desc" data-lang="fr">L'environnement amplifie la performance et l'adaptation. Le système s'améliore en mouvement. La performance se cumule.</div>
+    </div>
+  </div>
+</section>
+
+<!-- APPROACH -->
+<section class="approach" id="approach" id="about">
+  <div class="approach-inner">
+    <div>
+      <p class="section-eyebrow" data-lang="en">My Approach</p>
+      <p class="section-eyebrow" data-lang="fr">Mon approche</p>
+      <h2 data-lang="en">I don't believe in quick fixes.<br>I believe in <em>transformation that lasts.</em></h2>
+      <h2 data-lang="fr">Je ne crois pas aux solutions rapides.<br>Je crois en une <em>transformation qui dure.</em></h2>
+      <p data-lang="en">Throughout my career, I noticed something: I see patterns others don't. Across people, processes, systems, and structures — I make connections that most miss.</p>
+      <p data-lang="fr">Tout au long de ma carrière, j'ai remarqué quelque chose : je vois des patterns que les autres ne voient pas. À travers les personnes, les processus, les systèmes — je fais des connexions que la plupart manquent.</p>
+      <p data-lang="en">I'm not afraid to say the uncomfortable thing. And when 98% of people say "we can't do it," I come back with 161 ways we can — tailored to your people, your timeline, your budget.</p>
+      <p data-lang="fr">Je n'ai pas peur de dire ce qui est inconfortable. Et quand 98% des gens disent «&nbsp;on ne peut pas&nbsp;», je reviens avec 161 façons d'y arriver — adaptées à vos gens, votre calendrier, votre budget.</p>
+    </div>
+    <div>
+      <p class="section-eyebrow" data-lang="en">A defining principle</p>
+      <p class="section-eyebrow" data-lang="fr">Un principe fondateur</p>
+      <div class="divider-gold"><span style="color:var(--gold)">✦</span></div>
+      <p class="pull-quote" data-lang="en">"If you've tried so many things and it still doesn't work — I'm your person."</p>
+      <p class="pull-quote" data-lang="fr">«&nbsp;Si vous avez tout essayé et que ça ne fonctionne toujours pas — je suis votre personne.&nbsp;»</p>
+      <p class="pull-attr">— Cassandra Poulin, Organizational Diagnostician</p>
+      <div style="margin-top:40px;">
+        <p class="section-eyebrow" data-lang="en">Who this is for</p>
+        <p class="section-eyebrow" data-lang="fr">Pour qui</p>
+        <p style="font-size:14px; line-height:1.8; color:var(--text-light);" data-lang="en">Business owners, executives, HR and People & Culture leaders, and transformation teams who know something is off — and are ready to find out why.</p>
+        <p style="font-size:14px; line-height:1.8; color:var(--text-light);" data-lang="fr">Propriétaires d'entreprises, dirigeants, responsables RH et Culture, et équipes de transformation qui savent que quelque chose ne va pas — et sont prêts à découvrir pourquoi.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- FIELD NOTES -->
+<section class="field-notes" id="insights">
+  <div class="field-notes-header">
+    <div>
+      <p class="section-eyebrow" data-lang="en">Field Notes</p>
+      <p class="section-eyebrow" data-lang="fr">Notes de terrain</p>
+      <h2 data-lang="en">Thinking out loud<br>about <em>what others miss.</em></h2>
+      <h2 data-lang="fr">Réflexions à voix haute<br>sur <em>ce que les autres manquent.</em></h2>
+    </div>
+    <a href="https://www.linkedin.com/in/cassandra-j-poulin" target="_blank" data-lang="en">View all on LinkedIn →</a>
+    <a href="https://www.linkedin.com/in/cassandra-j-poulin" target="_blank" data-lang="fr">Voir tout sur LinkedIn →</a>
+  </div>
+
+  <div class="field-notes-grid">
+
+    <a class="field-card" href="https://www.linkedin.com/pulse/why-most-performance-issues-actually-leadership-design-poulin-qhlpe" target="_blank">
+      <div class="field-card-image">
+        <img src="field-slide6.png" alt="Why Most Performance Issues Are Actually Leadership Design Problems" />
+      </div>
+      <p class="field-card-type" data-lang="en">Article · LinkedIn Pulse</p>
+      <p class="field-card-type" data-lang="fr">Article · LinkedIn Pulse</p>
+      <p class="field-card-title" data-lang="en">Why Most Performance Issues Are Actually Leadership Design Problems</p>
+      <p class="field-card-title" data-lang="fr">Pourquoi la plupart des problèmes de performance sont en fait des problèmes de conception du leadership</p>
+      <p class="field-card-desc" data-lang="en">The system you design is the performance you will get. What happens when we stop blaming people and start examining the environment?</p>
+      <p class="field-card-desc" data-lang="fr">Le système que vous concevez est la performance que vous obtiendrez. Que se passe-t-il quand on arrête de blâmer les gens et qu'on examine l'environnement?</p>
+      <span class="field-card-link">Read the article →</span>
+    </a>
+
+    <a class="field-card" href="https://www.linkedin.com/posts/cassandra-j-poulin_leadership-consciousleadership-leadershipdevelopment-ugcPost-7456046366117588993-IBsl/" target="_blank">
+      <div class="field-card-image">
+        <img src="field-slide2.png" alt="Conscious Leadership" />
+      </div>
+      <p class="field-card-type" data-lang="en">Carousel · LinkedIn</p>
+      <p class="field-card-type" data-lang="fr">Carrousel · LinkedIn</p>
+      <p class="field-card-title" data-lang="en">Conscious Leadership</p>
+      <p class="field-card-title" data-lang="fr">Leadership conscient</p>
+      <p class="field-card-desc" data-lang="en">Maybe the concept isn't the problem. Maybe it's the context it was created in. A different lens on what leadership actually requires.</p>
+      <p class="field-card-desc" data-lang="fr">Peut-être que le concept n'est pas le problème. Peut-être que c'est le contexte dans lequel il a été créé. Une perspective différente sur ce que le leadership exige vraiment.</p>
+      <span class="field-card-link">View the post →</span>
+    </a>
+
+    <a class="field-card" href="https://www.linkedin.com/posts/cassandra-j-poulin_leadership-systemsthinking-organizationaldesign-ugcPost-7470887833650520064-Ov4t/" target="_blank">
+      <div class="field-card-image">
+        <img src="field-cover.png" alt="What if performance is one of the most misunderstood concepts in organizations?" />
+      </div>
+      <p class="field-card-type" data-lang="en">Carousel · LinkedIn</p>
+      <p class="field-card-type" data-lang="fr">Carrousel · LinkedIn</p>
+      <p class="field-card-title" data-lang="en">What if performance is one of the most misunderstood concepts in organizations?</p>
+      <p class="field-card-title" data-lang="fr">Et si la performance était l'un des concepts les plus mal compris dans les organisations?</p>
+      <p class="field-card-desc" data-lang="en">When results fall short, we examine effort, attitude, capability. But rarely expectations, priorities, constraints, or systems. Perhaps we're looking in the wrong place.</p>
+      <p class="field-card-desc" data-lang="fr">Quand les résultats déçoivent, on examine l'effort, l'attitude, les compétences. Mais rarement les attentes, les priorités, les contraintes ou les systèmes.</p>
+      <span class="field-card-link">View the post →</span>
+    </a>
+
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <p class="cta-eyebrow" data-lang="en">Let's have a conversation</p>
+  <p class="cta-eyebrow" data-lang="fr">Commençons la conversation</p>
+  <h2 data-lang="en">Something feels off.<br><em>Let's find out why.</em></h2>
+  <h2 data-lang="fr">Quelque chose ne tourne pas rond.<br><em>Découvrons pourquoi.</em></h2>
+  <p data-lang="en">Better alignment. Deeper understanding. Transformation that lasts.</p>
+  <p data-lang="fr">Meilleur alignement. Compréhension profonde. Une transformation qui dure.</p>
+  <a href="mailto:cassandra@auralisleadership.com" class="btn-cta" data-lang="en">Start the Conversation →</a>
+  <a href="mailto:cassandra@auralisleadership.com" class="btn-cta" data-lang="fr">Commencer la conversation →</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <img src="banner.png" alt="Auralis Leadership" style="height:44px; opacity:0.7;" />
+    <div class="footer-name">Cassandra Poulin</div>
+    <div class="footer-title">Organizational Diagnostician</div>
+    <p class="footer-desc" data-lang="en">Auralis Leadership helps leaders see what others miss — and design the conditions for transformation that lasts.</p>
+    <p class="footer-desc" data-lang="fr">Auralis Leadership aide les leaders à voir ce que les autres manquent — et à concevoir les conditions d'une transformation durable.</p>
+  </div>
+  <div class="footer-nav">
+    <h4 data-lang="en">Navigation</h4>
+    <h4 data-lang="fr">Navigation</h4>
+    <ul>
+      <li><a href="#" data-lang="en">About</a><a href="#" data-lang="fr">À propos</a></li>
+      <li><a href="#diagnostic" data-lang="en">Diagnostic</a><a href="#diagnostic" data-lang="fr">Diagnostic</a></li>
+      <li><a href="#approach" data-lang="en">Approach</a><a href="#approach" data-lang="fr">Approche</a></li>
+      <li><a href="#contact" data-lang="en">Contact</a><a href="#contact" data-lang="fr">Contact</a></li>
+    </ul>
+  </div>
+  <div class="footer-contact">
+    <h4 data-lang="en">Get in Touch</h4>
+    <h4 data-lang="fr">Nous joindre</h4>
+    <a href="mailto:cassandra@auralisleadership.com">cassandra@auralisleadership.com</a>
+    <a href="https://linkedin.com" target="_blank">LinkedIn →</a>
+    <p style="font-size:12px; color:rgba(245,240,232,0.3); margin-top:16px;">Laval, Québec, Canada</p>
+  </div>
+</footer>
+<div class="footer-bottom">
+  <p data-lang="en">© 2026 Auralis Leadership. All rights reserved. The Auralis Performance Environment Diagnostic™ is a proprietary framework.</p>
+  <p data-lang="fr">© 2026 Auralis Leadership. Tous droits réservés. Le Diagnostic Auralis Performance Environment™ est un cadre propriétaire.</p>
+</div>
+
+<script>
+  function toggleLang() {
+    document.body.classList.toggle('fr');
+    document.querySelector('.lang-toggle').textContent =
+      document.body.classList.contains('fr') ? 'EN | FR' : 'FR | EN';
+  }
+</script>
+</body>
+</html>
