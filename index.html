@@ -48,7 +48,7 @@
     .btn-talk:hover { background: var(--gold); }
 
     /* HERO */
-    .hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; padding-top: 84px; }
+    .hero { min-height: 100vh; display: grid; grid-template-columns: 55fr 45fr; padding-top: 84px; }
     .hero-left {
       display: flex; flex-direction: column; justify-content: center;
       padding: 80px 64px; background: var(--cream);
@@ -80,8 +80,8 @@
       border-bottom: 1px solid var(--gold); padding-bottom: 2px; transition: color 0.2s;
     }
     .btn-secondary:hover { color: var(--gold); }
-    .hero-right { position: relative; overflow: hidden; }
-    .hero-right img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+    .hero-right { position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; background: var(--cream); }
+    .hero-right img { width: 85%; height: 90%; object-fit: cover; object-position: center top; border-radius: 2px; }
 
     /* DIFFERENTIATOR BAND */
     .diff-band {
@@ -254,6 +254,54 @@
     .footer-bottom { background: var(--dark); padding: 20px 60px; border-top: 1px solid rgba(184,150,90,0.1); display: flex; justify-content: space-between; }
     .footer-bottom p { font-size: 11px; color: rgba(245,240,232,0.25); letter-spacing: 0.05em; }
 
+
+
+    /* AURALIS MEANING */
+    .auralis-meaning {
+      background: var(--dark);
+      padding: 100px 60px;
+    }
+    .auralis-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .auralis-meaning .section-eyebrow { color: var(--gold); margin-bottom: 16px; }
+    .auralis-meaning h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(36px, 3.5vw, 52px);
+      font-weight: 300; color: var(--cream);
+      line-height: 1.2; margin-bottom: 28px;
+    }
+    .auralis-meaning h2 em { font-style: italic; color: var(--gold-light); }
+    .auralis-meaning p {
+      font-size: 16px; line-height: 1.85;
+      color: rgba(245,240,232,0.75);
+      margin-bottom: 16px; font-weight: 400;
+    }
+    .auralis-meaning p em { font-style: italic; color: var(--gold-light); }
+    .auralis-quote-block {
+      border-left: 2px solid var(--gold);
+      padding: 40px 48px;
+      background: rgba(184,150,90,0.06);
+    }
+    .auralis-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(22px, 2.5vw, 32px);
+      font-style: italic; color: var(--cream);
+      line-height: 1.5; margin-bottom: 24px;
+      font-weight: 300;
+    }
+    .auralis-attr {
+      font-size: 12px; letter-spacing: 0.1em;
+      color: var(--gold); font-family: 'Jost', sans-serif;
+    }
+    @media (max-width: 960px) {
+      .auralis-meaning { padding: 60px 24px; }
+      .auralis-inner { grid-template-columns: 1fr; gap: 48px; }
+      .auralis-quote-block { padding: 32px 24px; }
+    }
 
     /* FIELD NOTES */
     .field-notes { background: var(--cream); padding: 100px 60px; border-top: 1px solid rgba(184,150,90,0.15); }
@@ -543,8 +591,34 @@
   </div>
 </section>
 
+
+<!-- AURALIS MEANING -->
+<section class="auralis-meaning" id="about">
+  <div class="auralis-inner">
+    <div class="auralis-left">
+      <p class="section-eyebrow" data-lang="en">About the Name</p>
+      <p class="section-eyebrow" data-lang="fr">Le sens du nom</p>
+      <h2 data-lang="en">Why <em>Auralis?</em></h2>
+      <h2 data-lang="fr">Pourquoi <em>Auralis?</em></h2>
+      <p data-lang="en">Auralis comes from <em>Aurum</em> — the Latin word for gold.</p>
+      <p data-lang="fr">Auralis vient d'<em>Aurum</em> — le mot latin pour l'or.</p>
+      <p data-lang="en">Gold doesn't announce itself. It doesn't sit on the surface. You have to know where to look, how to read the patterns in the rock, and have the patience to go deeper than everyone else.</p>
+      <p data-lang="fr">L'or ne s'annonce pas. Il ne se trouve pas en surface. Il faut savoir où chercher, comment lire les patterns dans la roche, et avoir la patience d'aller plus loin que tout le monde.</p>
+      <p data-lang="en">That's what we do at Auralis Leadership.</p>
+      <p data-lang="fr">C'est ce que nous faisons chez Auralis Leadership.</p>
+    </div>
+    <div class="auralis-right">
+      <div class="auralis-quote-block">
+        <div class="auralis-quote" data-lang="en">"We find what others miss. We go where others don't. And we surface what's been there all along — hidden in plain sight."</div>
+        <div class="auralis-quote" data-lang="fr">« Nous trouvons ce que les autres manquent. Nous allons là où les autres ne vont pas. Et nous révélons ce qui était là depuis le début — caché à la vue de tous. »</div>
+        <div class="auralis-attr">— Cassandra Poulin, Organizational Diagnostician</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- APPROACH -->
-<section class="approach" id="approach" id="about">
+<section class="approach" id="approach">
   <div class="approach-inner">
     <div>
       <p class="section-eyebrow" data-lang="en">My Approach</p>
